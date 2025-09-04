@@ -61,4 +61,16 @@ grep -cv "RNA" /Users/cmdb/Data/GTEx/GTEx_Analysis_v8_Annotations_SampleAttribut
 #2935
 
 #Exercise 4
-./transform_GTEx.py GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct
+./transform_GTEx.py /Users/cmdb/Data/GTEx/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct.gz /Users/cmdb/Data/GTEx/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt | head -n 3
+
+# GTEX-1117F-3226-SM-5N9CT 0.01776 Brain - Cortex
+# GTEX-111CU-0126-SM-5GZWZ 0.03757 Adrenal Gland
+# GTEX-111CU-0226-SM-5GZXC 0.04667 Thyroid
+# Traceback (most recent call last):
+#   File "/Users/cmdb/qb25-answers/unix-python-scripts/unix-python-scripts_assignment_files/./transform_GTEx.py", line 27, in <module>
+#     print(line[0],my_dict[line[0]],line[6])
+# BrokenPipeError: [Errno 32] Broken pipe
+# Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>
+# BrokenPipeError: [Errno 32] Broken pipe
+
+###Error above is probably caused by problems passing a python output to uix but it still gives the right answer
