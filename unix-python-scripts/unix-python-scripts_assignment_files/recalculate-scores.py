@@ -14,5 +14,6 @@ for line in recalc:
     print(f"{column[0]}\t{column[1]}\t{column[2]}\t{column[3]}\t{new_score}\t{column[5]}")
     
           
+          
 
     
