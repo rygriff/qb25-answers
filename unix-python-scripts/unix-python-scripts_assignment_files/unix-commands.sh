@@ -61,3 +61,4 @@ grep -cv "RNA" /Users/cmdb/Data/GTEx/GTEx_Analysis_v8_Annotations_SampleAttribut
 #2935
 
 #Exercise 4
+./transform_GTEx.py GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct
