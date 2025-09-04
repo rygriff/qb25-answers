@@ -20,3 +20,5 @@ size: 127M
 
 number of contigs:
 i = 1591
+The sum of all contigs is 118549266
+The average contig size is 74512.42363293526
