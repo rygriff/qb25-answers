@@ -22,3 +22,15 @@ number of contigs:
 i = 1591
 The sum of all contigs is 118549266
 The average contig size is 74512.42363293526
+
+Instructions on assembly-metrics.py:
+
+code will return the number of contigs, sum of all contigs, and average contig size of contigs in a genomic.fa file 
+
+run in unix shell:
+././assembly-metrics.py your_file_here.genomic.fa
+
+output example:
+1591
+The sum of all contigs is 118549266
+The average contig size is 74512.42363293526
