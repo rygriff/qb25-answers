@@ -17,3 +17,6 @@ size: 141M
 - https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA577507/caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa.gz
 
 size: 127M
+
+number of contigs:
+i = 1591
