@@ -1,0 +1,33 @@
+tissue name:Pancreas	gene name:ENSG00000162438.11	mean:11.64813927955005	standard deviation:0.7569127456707324	relative standard deviation0.06498142986662252
+tissue name:Pancreas	gene name:ENSG00000142615.7	mean:11.982260919355417	standard deviation:1.4102843042771578	relative standard deviation0.11769767940865569
+tissue name:Pancreas	gene name:ENSG00000219073.7	mean:13.186023575042132	standard deviation:0.6686288767560536	relative standard deviation0.0507073927898629
+tissue name:Pancreas	gene name:ENSG00000142789.19	mean:14.651792140427176	standard deviation:0.5218123123327285	relative standard deviation0.03561423116923326
+tissue name:Testis	gene name:ENSG00000203784.2	mean:10.588661238478307	standard deviation:1.247730148920803	relative standard deviation0.11783644039783389
+tissue name:Liver	gene name:ENSG00000132693.12	mean:11.233820059075176	standard deviation:3.226760526858047	relative standard deviation0.287236266015435
+tissue name:Liver	gene name:ENSG00000158874.11	mean:12.403165379794865	standard deviation:0.6792045031445219	relative standard deviation0.054760577832088465
+tissue name:Testis	gene name:ENSG00000118245.2	mean:12.68051955583237	standard deviation:1.43644711493291	relative standard deviation0.11327983120945705
+tissue name:Minor Salivary Gland	gene name:ENSG00000171195.10	mean:13.66240542509939	standard deviation:3.5032956827597763	relative standard deviation0.25641865936168345
+tissue name:Pituitary	gene name:ENSG00000172179.11	mean:15.34070940366395	standard deviation:2.0206570007429447	relative standard deviation0.13171861532429094
+tissue name:Pancreas	gene name:ENSG00000137392.9	mean:15.263872743216705	standard deviation:0.8468482858600447	relative standard deviation0.05548056512960551
+tissue name:Pituitary	gene name:ENSG00000135346.8	mean:11.211051271082567	standard deviation:2.0499985287011673	relative standard deviation0.18285515596462118
+tissue name:Pancreas	gene name:ENSG00000091704.9	mean:15.458753143882536	standard deviation:0.7168284913677108	relative standard deviation0.046370395121509526
+tissue name:Pancreas	gene name:ENSG00000204983.13	mean:16.137787479687645	standard deviation:0.7923957350818511	relative standard deviation0.04910188190786537
+tissue name:Small Intestine - Terminal Ileum	gene name:ENSG00000164822.4	mean:10.555235965173559	standard deviation:3.169638206236141	relative standard deviation0.3002906061687483
+tissue name:Small Intestine - Terminal Ileum	gene name:ENSG00000164816.7	mean:11.725206247846716	standard deviation:3.058467014472547	relative standard deviation0.2608454768148937
+tissue name:Thyroid	gene name:ENSG00000042832.11	mean:12.68872987138559	standard deviation:0.9466497886933655	relative standard deviation0.07460555928676199
+tissue name:Lung	gene name:ENSG00000122852.14	mean:10.094051754993973	standard deviation:2.898939950667679	relative standard deviation0.2871928954825742
+tissue name:Stomach	gene name:ENSG00000182333.14	mean:12.506637140125969	standard deviation:5.008124091462851	relative standard deviation0.4004373066357635
+tissue name:Pancreas	gene name:ENSG00000175535.6	mean:14.577667957161138	standard deviation:1.5762463141234202	relative standard deviation0.10812746721598254
+tissue name:Pancreas	gene name:ENSG00000187021.14	mean:11.352044322367236	standard deviation:0.6075874020016648	relative standard deviation0.05352228944389507
+tissue name:Pancreas	gene name:ENSG00000254647.6	mean:10.997384243879184	standard deviation:1.883368404390191	relative standard deviation0.1712560334916385
+tissue name:Stomach	gene name:ENSG00000134812.7	mean:8.290498779007475	standard deviation:4.149387157855456	relative standard deviation0.5004990976371887
+tissue name:Stomach	gene name:ENSG00000229859.9	mean:8.732697313784572	standard deviation:4.592577643995391	relative standard deviation0.5259059691380809
+tissue name:Stomach	gene name:ENSG00000256713.7	mean:9.42991153416666	standard deviation:4.4888434683562	relative standard deviation0.47602180063854527
+tissue name:Pancreas	gene name:ENSG00000170890.13	mean:14.073429783545471	standard deviation:0.5716015088092966	relative standard deviation0.04061565074049028
+tissue name:Testis	gene name:ENSG00000122304.10	mean:14.012950172919384	standard deviation:1.427707886766327	relative standard deviation0.1018848899873656
+tissue name:Testis	gene name:ENSG00000175646.3	mean:13.921464122485672	standard deviation:1.4971697259649486	relative standard deviation0.10754398479875044
+tissue name:Pancreas	gene name:ENSG00000168928.12	mean:14.362048866146097	standard deviation:0.5784310072574064	relative standard deviation0.040274964432189836
+tissue name:Pancreas	gene name:ENSG00000168925.10	mean:14.136953933949323	standard deviation:0.41804835743325813	relative standard deviation0.029571317794941095
+tissue name:Pancreas	gene name:ENSG00000240338.5	mean:11.7016676968443	standard deviation:0.7049184196809453	relative standard deviation0.06024085095759875
+tissue name:Pituitary	gene name:ENSG00000259384.6	mean:15.281443747697883	standard deviation:2.1264929422303025	relative standard deviation0.13915523803506158
+tissue name:Prostate	gene name:ENSG00000142515.14	mean:11.359285573911217	standard deviation:2.779602912213012	relative standard deviation0.24469874395947086
