@@ -34,3 +34,17 @@ output example:
 1591
 The sum of all contigs is 118549266
 The average contig size is 74512.42363293526
+
+Summary for assembly-metrics:
+caenorhabditis_remanei.PRJNA248909.WBPS19.genomic.fa
+number of contigs:1591
+N50 = 1522088
+caenorhabditis_remanei.PRJNA248911.WBPS19.genomic.fa
+number of contigs:912
+N50 = 1765890
+caenorhabditis_remanei.PRJNA53967.WBPS19.genomic.fa
+number of contigs:3670
+N50 = 435512
+caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa
+number of contigs:187
+N50 = 21501900
