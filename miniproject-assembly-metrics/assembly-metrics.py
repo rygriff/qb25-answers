@@ -10,6 +10,6 @@ for ident, sequence in contigs:
     print(ident)
     print( f"First 20 nucleotides: {sequence[:20]}" )
     i += 1
-print(i)
+print(i) #i = 1591
 
     
