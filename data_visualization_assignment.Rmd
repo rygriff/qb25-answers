@@ -1,0 +1,183 @@
+In this exercise, you will practice basic plotting with **`ggplot2`** on a dataset of median gene expression levels across samples from various human tissues from the GTEx Project. The dataset (`dt`) has one row per gene, with columns:
+
+-   `Name`: the Ensembl gene ID
+-   `Description`: the gene symbol
+-   One column per tissue containing the median expression levels (in TPM units)
+
+Insert your code into the empty code blocks. Insert answers any comprehension questions as comments within the code blocks. You do not need to submit the figures themselves, only the code used to produce them. Remember to label your axes!
+
+------------------------------------------------------------------------
+
+### Load data
+
+Start by loading the data into R, as before.
+
+```{r load-data}
+library(tidyverse)
+
+dt <- read_delim(
+  "/Users/cmdb/Data/GTEx/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz",
+  skip = 2, col_names = TRUE, delim = "\t"
+)
+```
+
+------------------------------------------------------------------------
+
+### Q1. Histogram
+
+Make a histogram of gene expression in the liver. Use the argument `breaks = seq(0, 100, 2)` to bin in units of 2 TPM, ranging from 0 to 100. Note that this cuts off the data at 100, which might be misleading depending on what we are trying to depict!
+
+What do you notice about the shape of the distribution? What does it tell you about the relative expression of genes in the liver transcriptome? Do you think this is specific to the liver? Check another tissue, as well.
+
+```{r q1}
+ggplot(data = dt, aes(x = Liver)) +
+  geom_histogram(breaks = seq(0, 70, 2)) +
+   labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  theme_minimal()
+
+#the distribution is skewed towards 0, indicating that most genes have a median expression that is very low and only a few that are  - this is not specific to the liver as most organs/tissues would have key genes that need to be expressed and many many more that almost never get expressed.
+```
+
+------------------------------------------------------------------------
+
+### Q2. Density plot
+
+Going back to the liver, now represent the same data with a density plot rather than a histogram. Do not restrict the X axis. Within the same code block, create a second plot where you scale the X axis to a log10 scale. Add a pseudo-count of 1 to the expression values, as the log of 0 is negative infinity.
+
+```{r q2}
+ggplot(data = dt, aes(x = Liver)) +
+  geom_density() +
+  labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  #scale_x_log10() +
+  theme_minimal()
+
+ggplot(data = dt, aes(x = Liver + 1)) +
+  geom_density() +
+  labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  scale_x_log10() +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+### Q3. Scatter plot
+
+Make a scatter plot comparing the expression genes in the `Liver` to the same genes in the `Heart - Left Ventricle`. Add a pseudocount to each and log10 scale both the X and Y axes. Adjust the point size to 1 and the alpha (opacity) to 0.2. Add a dashed red line along the diagonal (y = x).
+
+```{r q3}
+ggplot(data = dt, aes(x = Liver + 1, y = `Heart - Left Ventricle` +1)) +
+  geom_point(size = 2, alpha = 0.2) +
+  geom_abline(slope = 1, color = "red", linetype = "dashed") +
+  labs(title = "Expression Levels in the Liver and Heart",
+       x = "Expression Levels in Liver",
+       y = "Expression Levels in Liver") +
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+### Q4. Colored points on scatter plot
+
+Color the previous scatter plot points based on whether the genes are mitochondrial vs nuclear encoded. Note that the tidyverse function `str_starts()` can test whether a string starts with a specific pattern.
+
+```{r q4}
+ggplot(data = dt, aes(x = Liver + 1, y = `Heart - Left Ventricle` +1, colour = str_starts(Description,"MT"))) +
+  geom_point(size = 2, alpha = 0.2) +
+  geom_abline(slope = 1, color = "red", linetype = "dashed") +
+  labs(title = "Expression Levels in the Liver and Heart",
+       x = "Expression Levels in Liver",
+       y = "Expression Levels in Liver") +
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+### Q5. Facets
+
+Repeat question 1 (histogram), but faceting such that you create separate panels (arranged horizontally) for several tissues of interest:
+
+```{r}
+focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "Brain - Cortex")
+dt %>% pivot_longer(
+  col = focal_tissues, 
+  names_to = "tissue_interest",
+   values_to = "value"
+ ) %>%
+ggplot(aes(x = value)) +
+  geom_histogram(breaks = seq(0, 70, 2)) +
+   labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  facet_grid(.~ tissue_interest) +
+  theme_minimal()
+```
+
+This requires first converting the data into "long" format with `pivot_longer()`:
+
+# `{r} # dt_long <- dt %>% #   select("Description", "is_mitochondrial", all_of(focal_tissues)) %>% #   pivot_longer(cols = focal_tissues, names_to = "Tissue", values_to = "TPM") ##SEE ABOVE###`
+
+After creating 5-panel plot, also split into two rows that separate genes that are versus are not encoded by the mitochondrial genome (10 panels). Use the argument `scales = "free_y"` to deal with the fact that there are far fewer mitochondrial-encoded than nuclear-encoded genes.
+
+```{r q5}
+# your code for 5-panel plot
+focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "Brain - Cortex")
+dt %>% pivot_longer(
+  col = focal_tissues, 
+  names_to = "tissue_interest",
+   values_to = "value"
+ ) %>%
+ggplot(aes(x = value)) +
+  geom_histogram(breaks = seq(0, 70, 2)) +
+   labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  facet_grid(.~ tissue_interest) +
+  theme_minimal()
+
+# your code for 10-panel plot
+focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "Brain - Cortex")
+dt %>% pivot_longer(
+  col = focal_tissues,
+  names_to = "tissue_interest",
+   values_to = "value"
+ ) %>%
+ mutate(is_mito = str_starts(Description, "MT-"))  %>% group_by(is_mito) %>% 
+ggplot(aes(x = value, fill = is_mito)) +
+  geom_histogram(breaks = seq(0, 70, 2)) +
+   labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  facet_grid(is_mito ~ tissue_interest, scales = "free_y") +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+Optional: Have fun and explore these data! Create your own plots and interpret them.
+
+```{r q5}
+focal_tissues <- c("Liver", "Testis", "Whole Blood", "Heart - Left Ventricle", "Brain - Cortex")
+dt %>% pivot_longer(
+  col = focal_tissues, 
+  names_to = "tissue_interest",
+   values_to = "value"
+ ) %>%
+ggplot(aes(x = value)) +
+  geom_histogram(breaks = seq(0, 70, 2)) +
+   labs(title = "Median Expression Levels of Genes in The Liver",
+       x = "Expression Level",
+       y = "Frequency") +
+  facet_grid(.~ tissue_interest) +
+  theme_minimal()
+# answer here
+```
