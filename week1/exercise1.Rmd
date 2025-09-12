@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(tidyverse)
+header <- c("chr", "start", "end", "count")
+df_kc <- read_tsv('/Users/cmdb/qb25-answers/week1/hg19-kc-count.bed', col_names = header)
+df_kc
+```
+```{r}
+ggplot(df_kc, aes(x= start, y= count, color = chr)) +
+  geom_point(data = df_kc %>% filter(chr == "chrMT")) +
+  geom_line() +
+  facet_wrap(.~chr, scales = "free")
+  ggsave("exercise1.png")
+```
+
