@@ -47,5 +47,5 @@ samtools idxstats A01_01.bam > A01_01.idxstats
 
 #exercise 2
 
-#The samples in igv viewer that have a lot of colorful lines (snps) correspond to "R" strains in the BYxRM_GenoData.txt file. This makes sense becaus ethe reference strain for IGV is "B".
+#The samples in igv viewer that have a lot of colorful lines (snps) correspond to "R" strains in the BYxRM_GenoData.txt file. This makes sense because the reference strain for IGV is "B".
 
