@@ -49,3 +49,8 @@ samtools idxstats A01_01.bam > A01_01.idxstats
 
 #The samples in igv viewer that have a lot of colorful lines (snps) correspond to "R" strains in the BYxRM_GenoData.txt file. This makes sense because the reference strain for IGV is "B".
 
+#Exercise 4
+minimap2 -a -x map-ont ../genomes/sacCer3.fa ../rawdata/ERR8562476.fastq > longreads.sam
+samtools sort -o longreads.bam longreads.sam
+samtools index longreads.bam
+samtools idxstats longreads.bam > longreads.idxstats
