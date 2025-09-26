@@ -54,3 +54,19 @@ minimap2 -a -x map-ont ../genomes/sacCer3.fa ../rawdata/ERR8562476.fastq > longr
 samtools sort -o longreads.bam longreads.sam
 samtools index longreads.bam
 samtools idxstats longreads.bam > longreads.idxstats
+
+#exercise 5
+hisat2 -x ../rawdata/sacCer3 -U ../rawdata/SRR10143769.fastq -S SRR10143769.sam
+
+#   2917686 reads; of these:
+#   2917686 (100.00%) were unpaired; of these:
+#   296805 (10.17%) aligned 0 times
+#   2245829 (76.97%) aligned exactly 1 time
+#   375052 (12.85%) aligned >1 times
+#   89.83% overall alignment rate
+
+samtools sort -o SRR10143769.bam SRR10143769.sam
+samtools index SRR10143769.bam
+samtools idxstats SRR10143769.bam > SRR10143769.idxstats
+
+#   generally it seems like coverage of RNAs is highest in exons and weakest across introns. However, it does seem like some genes see high coverage over intron regions - this could be non-coding regulatory RNAs that are expressed. 
