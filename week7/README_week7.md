@@ -15,3 +15,9 @@ Title: Week 7 Assignment Answers
 ## What feature explains the first principal component (simply saying “tissue” is not sufficient)?
 
 ### PC1 seems to be influenced by a negative correlation of Tissues A1 and A2.3 and a positive correlation of Tissues Fe and P1.
+
+# Exercise 3
+
+## Do the categories of enrichment make sense? Why?
+
+### In cluster 1 I am seeing a lot of enrichment in genes involved in RNA processing (at various steps). In cluster 8, the enriched genes are largely involved in innate immunity. It makes sense that gene expression would vary across different segments of the midgut, as the cell types and functions differ across the regions. Since different clusters were generated with tissues as factors, these varying purposes are baked into the clustering data as well. So it is not surprising that different clusters would represent enrichment for different gene pathways.

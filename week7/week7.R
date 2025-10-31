@@ -111,3 +111,28 @@ scree_as_bar <- pca_summary2 %>% ggplot(aes(PC, norm_var)) +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("/Users/cmdb/qb25-answers/week7/scree_as_bar.png", plot = scree_as_bar, width = 8)
 
+#Kmeans clustering
+sorted_gene_exp_nosd <- sorted_gene_exp_sd[, colnames(sorted_gene_exp_sd) != "sd"]
+set.seed(42)
+kmeans_results = kmeans(as.matrix(sorted_gene_exp_nosd), centers = 12, nstart=100)
+cluster_labels <- kmeans_results$cluster
+ordering = order(cluster_labels)
+
+#generate heat map and save it as a PNG
+png(file="/Users/cmdb/qb25-answers/week7/heatmap_clusters.png")
+
+heatmap(as.matrix(as.matrix(sorted_gene_exp_nosd))[ordering,], Rowv=NA, Colv=NA,
+        RowSideColors=RColorBrewer::brewer.pal(12, name="Paired")[kmeans_results$cluster[ordering]], scale='none')
+
+dev.off()
+
+#Select two clusters to investigate.
+##1 and 8
+
+#For each, get the gene names using rownames , 
+#filtering for only genes within the cluster you have selected.
+cluster1 <- rownames(sorted_gene_exp_nosd)[cluster_labels == 1]
+writeLines(cluster1, "/Users/cmdb/qb25-answers/week7/cluster1.txt")
+
+cluster8 <- rownames(sorted_gene_exp_nosd)[cluster_labels == 8]
+writeLines(cluster8, "/Users/cmdb/qb25-answers/week7/cluster8.txt")
