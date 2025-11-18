@@ -16,7 +16,10 @@ sd
 gene_exp_sd <- cbind(gene_exp, sd)
 #now I have to sort the matrix
 sorted_gene_exp_sd <- gene_exp_sd[order(gene_exp_sd[, "sd"], decreasing = TRUE),]
-sorted_gene_exp_sd_500 <- head(gene_exp_sd, n = 500)
+unswitched_sorted_gene_exp_sd <- sorted_gene_exp_sd
+unswitched_sorted_gene_exp_sd[12, ] <- sorted_gene_exp_sd[13, ]
+unswitched_sorted_gene_exp_sd[13, ] <- sorted_gene_exp_sd[12, ]
+sorted_gene_exp_sd_500 <- head(sorted_gene_exp_sd, n = 500)
 
 #run the PCA analysis on the 500 most variant genes
 transposed_sorted_gene_exp_sd_500 <- t(sorted_gene_exp_sd_500)
@@ -61,7 +64,11 @@ heatmap(PCA$x, Rowv = NA, Colv = NA, col = cm.colors(256))
 
 #run the PCA analysis on the 500 most variant genes - this time dropping the sd row
 nosd_transposed_sorted_gene_exp_sd_500 <- transposed_sorted_gene_exp_sd_500[rownames(transposed_sorted_gene_exp_sd_500) != "sd", ]
-PCA2 <- prcomp(x = nosd_transposed_sorted_gene_exp_sd_500)
+#also need to "un-switch" LFC.Fe_rep3 and Fe_rep1
+unswitched_nosd_transposed_sorted_gene_exp_sd_500 <- nosd_transposed_sorted_gene_exp_sd_500
+unswitched_nosd_transposed_sorted_gene_exp_sd_500[12, ] <- nosd_transposed_sorted_gene_exp_sd_500[13, ]
+unswitched_nosd_transposed_sorted_gene_exp_sd_500[13, ] <- nosd_transposed_sorted_gene_exp_sd_500[12, ]
+PCA2 <- prcomp(x = unswitched_nosd_transposed_sorted_gene_exp_sd_500)
 
 #making dataframe with PCA2 results (its easier to look at for me)
 PC_Coordinates2 <- as.data.frame(PCA2[["x"]]) 
@@ -112,20 +119,35 @@ scree_as_bar <- pca_summary2 %>% ggplot(aes(PC, norm_var)) +
 ggsave("/Users/cmdb/qb25-answers/week7/scree_as_bar.png", plot = scree_as_bar, width = 8)
 
 #Kmeans clustering
-sorted_gene_exp_nosd <- sorted_gene_exp_sd[, colnames(sorted_gene_exp_sd) != "sd"]
+#2.1 Avging
+#unswitched_sorted_gene_exp_nosd <- unswitched_sorted_gene_exp_sd[, colnames(sorted_gene_exp_sd) != "sd"]
+combined = unswitched_sorted_gene_exp_sd[,seq(1, 21, 3)]
+combined = combined + unswitched_sorted_gene_exp_sd[,seq(2, 21, 3)]
+combined = combined + unswitched_sorted_gene_exp_sd[,seq(3, 21, 3)]
+combined = combined / 3
+sd <- rowSds(combined)
+print(sd)
+
+#filtering
+#sd %>% select_if(is.numeric) %>% drop_na() %>% cor
+sd2 <- sd > 1
+combined <- combined[sd2, ]
+
+rowSds(combined)
 set.seed(42)
-kmeans_results = kmeans(as.matrix(sorted_gene_exp_nosd), centers = 12, nstart=100)
+
+#unswitched_sorted_gene_exp_nosd <- unswitched_sorted_gene_exp_sd[, colnames(sorted_gene_exp_sd) != "sd"]
+kmeans_results = kmeans(as.matrix(combined), centers = 12, nstart=100)
 cluster_labels <- kmeans_results$cluster
 ordering = order(cluster_labels)
 
 #generate heat map and save it as a PNG
 png(file="/Users/cmdb/qb25-answers/week7/heatmap_clusters.png")
 
-heatmap(as.matrix(as.matrix(sorted_gene_exp_nosd))[ordering,], Rowv=NA, Colv=NA,
+heatmap(as.matrix(as.matrix(combined)[ordering,]), Rowv=NA, Colv=NA,
         RowSideColors=RColorBrewer::brewer.pal(12, name="Paired")[kmeans_results$cluster[ordering]], scale='none')
 
 dev.off()
-
 #Select two clusters to investigate.
 ##1 and 8
 
