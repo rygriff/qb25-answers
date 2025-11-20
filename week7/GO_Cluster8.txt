@@ -9,17 +9,7 @@ Analyzed List:	upload_1 (Drosophila melanogaster)
 Reference List:	Drosophila melanogaster (all genes in database)
 Test Type:	FISHER
 Correction:	FDR
-GO biological process complete	Drosophila melanogaster - REFLIST (13821)	upload_1 (40)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
-innate immune response (GO:0045087)	282	9	.82	+	11.03	8.48E-08	2.05E-04
-defense response to symbiont (GO:0140546)	293	9	.85	+	10.61	1.18E-07	2.13E-04
-defense response to other organism (GO:0098542)	298	9	.86	+	10.44	1.36E-07	1.97E-04
-immune response (GO:0006955)	342	9	.99	+	9.09	4.35E-07	5.26E-04
-immune system process (GO:0002376)	440	9	1.27	+	7.07	3.52E-06	3.64E-03
-proteolysis (GO:0006508)	860	17	2.49	+	6.83	6.14E-11	4.45E-07
-defense response (GO:0006952)	492	9	1.42	+	6.32	8.71E-06	7.02E-03
-response to external biotic stimulus (GO:0043207)	519	9	1.50	+	5.99	1.34E-05	9.70E-03
-response to other organism (GO:0051707)	519	9	1.50	+	5.99	1.34E-05	8.82E-03
-response to biotic stimulus (GO:0009607)	520	9	1.50	+	5.98	1.36E-05	8.21E-03
-biological process involved in interspecies interaction between organisms (GO:0044419)	551	9	1.59	+	5.64	2.15E-05	1.20E-02
-protein metabolic process (GO:0019538)	1730	19	5.01	+	3.79	6.22E-08	2.26E-04
-primary metabolic process (GO:0044238)	3819	25	11.05	+	2.26	6.56E-06	5.94E-03
+GO biological process complete	Drosophila melanogaster - REFLIST (13821)	upload_1 (1061)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+macromolecule metabolic process (GO:0043170)	2894	281	222.16	+	1.26	7.28E-06	2.64E-02
+metabolic process (GO:0008152)	4386	402	336.70	+	1.19	1.08E-05	2.62E-02
+cellular process (GO:0009987)	8419	733	646.30	+	1.13	9.42E-09	6.83E-05

@@ -145,16 +145,15 @@ ordering = order(cluster_labels)
 png(file="/Users/cmdb/qb25-answers/week7/heatmap_clusters.png")
 
 heatmap(as.matrix(as.matrix(combined)[ordering,]), Rowv=NA, Colv=NA,
-        RowSideColors=RColorBrewer::brewer.pal(12, name="Paired")[kmeans_results$cluster[ordering]], scale='none')
+        RowSideColors=RColorBrewer::brewer.pal(12, name="Paired")[kmeans_results$cluster[ordering]])
 
 dev.off()
 #Select two clusters to investigate.
 ##1 and 8
 
-#For each, get the gene names using rownames , 
-#filtering for only genes within the cluster you have selected.
-cluster1 <- rownames(sorted_gene_exp_nosd)[cluster_labels == 1]
+#filtering for only genes within each cluster
+cluster1 <- rownames(unswitched_sorted_gene_exp_sd)[cluster_labels == 1]
 writeLines(cluster1, "/Users/cmdb/qb25-answers/week7/cluster1.txt")
 
-cluster8 <- rownames(sorted_gene_exp_nosd)[cluster_labels == 8]
+cluster8 <- rownames(unswitched_sorted_gene_exp_sd)[cluster_labels == 8]
 writeLines(cluster8, "/Users/cmdb/qb25-answers/week7/cluster8.txt")
