@@ -1,0 +1,278 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+# Read in coverage.txt from python code
+df <- read.csv("/Users/cmdb/qb25-answers/week11/coverage.txt", header = FALSE)
+coverage <- df$V1
+```
+
+```{r}
+# Estimate Poisson expected counts
+lambda <- 3
+xs <- 0:max(coverage)
+
+# dpois gets the density probability of a Poisson distribution
+pois_density_prob  <- dpois(xs, lambda)
+
+# to transform these probabilities into a frequency count comparable to those in our histogram multiply by genome size
+pois_counts <- pois_density_prob * length(coverage)
+
+# read coverage possibilities (0 - max), the counts I just calculated, and the type (so later I can add the Normal distribution to the same table)
+pois_df <- tibble(
+  xs = xs,
+  count = pois_counts,
+  type = "Poisson")
+```
+
+
+```{r}
+# Estimate Normal expected counts
+
+# dnorm gets the density probability of a Normal distribution
+norm_probs  <- dnorm(xs, mean = lambda, sd = sqrt(lambda))
+
+# same as before, to translate the probabilities into counts multiply by genome size
+norm_counts <- norm_probs * length(coverage)
+
+# create table like before
+norm_df <- tibble(
+  xs = xs,
+  count = norm_counts,
+  type = "Normal")
+
+# combine tables for plotting
+combined_df <- bind_rows(pois_df, norm_df)
+```
+
+
+```{r}
+# Plot
+coverage_3 <- ggplot() +
+  geom_histogram(data = df, aes(x = coverage), binwidth = 0.5) +
+  geom_line(data = combined_df, aes(x = xs, y = count, color = type)) +
+  labs(
+    title = "Coverage Histogram with Poisson and Normal Overlays (3× Coverage)",
+    x = "Depth of Coverage",
+    y = "Count",
+    color = "Model") 
+coverage_3
+ggsave("/Users/cmdb/qb25-answers/week11/ex1_3x_cov.png", plot = coverage_3)
+```
+
+
+```{r}
+# caluclate how much of the genome has not been sequenced (has 0x coverage)?
+zero_count <- nrow(filter(df, V1 == 0))
+zero_count
+
+#caluclate what percentage of the genome this is
+zero_percentage <- zero_count / length(coverage)
+zero_percentage
+```
+
+```{r}
+# we can see how well this matches the Poission expected 0X coverage 
+zero_pois_density_prob  <- dpois(0, lambda)
+zero_pois_counts <- zero_pois_density_prob * length(coverage)
+
+zero_pois_counts
+zero_pois_counts/length(coverage)
+```
+They actually match pretty well! About 5% of the genome when poission estimated about 5%.
+
+```{r}
+# how well does the normal distribution match the zero coverage?
+zero_norm_probs  <- dnorm(0, mean = lambda, sd = sqrt(lambda))
+zero_norm_counts <- zero_norm_probs * length(coverage)
+
+zero_norm_counts
+zero_norm_counts/length(coverage)
+```
+This also matches the data pretty well - but a little high of an estimate 5.1%. 
+
+# Now repeat whole process with 10X
+
+```{r}
+# Read in coverage_10.txt from python code
+df_10 <- read.csv("/Users/cmdb/qb25-answers/week11/coverage_10.txt", header = FALSE)
+coverage_10 <- df_10$V1
+```
+
+```{r}
+# Estimate Poisson expected counts
+lambda <- 10
+xs <- 0:max(coverage_10)
+
+# dpois gets the density probability of a Poisson distribution
+pois_density_prob_10  <- dpois(xs, lambda)
+
+# to transform these probabilities into a frequency count comparable to those in our histogram multiply by genome size
+pois_counts_10 <- pois_density_prob_10 * length(coverage_10)
+
+# read coverage possibilities (0 - max), the counts I just calculated, and the type (so later I can add the Normal distribution to the same table)
+pois_df_10 <- tibble(
+  xs = xs,
+  count = pois_counts_10,
+  type = "Poisson")
+```
+
+
+```{r}
+# Estimate Normal expected counts
+
+# dnorm gets the density probability of a Normal distribution
+norm_probs_10  <- dnorm(xs, mean = lambda, sd = sqrt(lambda))
+
+# same as before, to translate the probabilities into counts multiply by genome size
+norm_counts_10 <- norm_probs_10 * length(coverage_10)
+
+# create table like before
+norm_df_10 <- tibble(
+  xs = xs,
+  count = norm_counts_10,
+  type = "Normal")
+
+# combine tables for plotting
+combined_df_10 <- bind_rows(pois_df_10, norm_df_10)
+```
+
+
+```{r}
+# Plot
+plot_coverage_10 <- ggplot() +
+  geom_histogram(data = df_10, aes(x = coverage_10), binwidth = 0.5) +
+  geom_line(data = combined_df_10, aes(x = xs, y = count, color = type)) +
+  labs(
+    title = "Coverage Histogram with Poisson and Normal Overlays (10× Coverage)",
+    x = "Depth of Coverage",
+    y = "Count",
+    color = "Model") 
+plot_coverage_10
+ggsave("/Users/cmdb/qb25-answers/week11/ex1_10x_cov.png", plot = plot_coverage_10)
+```
+
+```{r}
+# caluclate how much of the genome has not been sequenced (has 0x coverage)?
+zero_count <- nrow(filter(df_10, V1 == 0))
+zero_count
+
+#caluclate what percentage of the genome this is
+zero_percentage <- zero_count / length(coverage_10)
+zero_percentage
+```
+
+```{r}
+# we can see how well this matches the Poission expected 0X coverage 
+zero_pois_density_prob  <- dpois(0, lambda)
+zero_pois_counts <- zero_pois_density_prob * length(coverage_10)
+
+zero_pois_counts
+zero_pois_counts/length(coverage_10)
+```
+
+```{r}
+# how well does the normal distribution match the zero coverage?
+zero_norm_probs  <- dnorm(0, mean = lambda, sd = sqrt(lambda))
+zero_norm_counts <- zero_norm_probs * length(coverage_10)
+
+zero_norm_counts
+zero_norm_counts/length(coverage_10)
+```
+
+
+# Now repeat whole process with 30X
+
+
+```{r}
+# Read in coverage_10.txt from python code
+df_30 <- read.csv("/Users/cmdb/qb25-answers/week11/coverage_30.txt", header = FALSE)
+coverage_30 <- df_30$V1
+```
+
+```{r}
+# Estimate Poisson expected counts
+lambda <- 30
+xs <- 0:max(coverage_30)
+
+# dpois gets the density probability of a Poisson distribution
+pois_density_prob_30  <- dpois(xs, lambda)
+
+# to transform these probabilities into a frequency count comparable to those in our histogram multiply by genome size
+pois_counts_30 <- pois_density_prob_30 * length(coverage_30)
+
+# read coverage possibilities (0 - max), the counts I just calculated, and the type (so later I can add the Normal distribution to the same table)
+pois_df_30 <- tibble(
+  xs = xs,
+  count = pois_counts_30,
+  type = "Poisson")
+```
+
+
+```{r}
+# Estimate Normal expected counts
+
+# dnorm gets the density probability of a Normal distribution
+norm_probs_30  <- dnorm(xs, mean = lambda, sd = sqrt(lambda))
+
+# same as before, to translate the probabilities into counts multiply by genome size
+norm_counts_30 <- norm_probs_30 * length(coverage_30)
+
+# create table like before
+norm_df_30 <- tibble(
+  xs = xs,
+  count = norm_counts_30,
+  type = "Normal")
+
+# combine tables for plotting
+combined_df_30 <- bind_rows(pois_df_30, norm_df_30)
+```
+
+
+```{r}
+# Plot
+plot_coverage_30 <- ggplot() +
+  geom_histogram(data = df_30, aes(x = coverage_30), binwidth = 0.5) +
+  geom_line(data = combined_df_30, aes(x = xs, y = count, color = type)) +
+  labs(
+    title = "Coverage Histogram with Poisson and Normal Overlays (30× Coverage)",
+    x = "Depth of Coverage",
+    y = "Count",
+    color = "Model") 
+plot_coverage_30
+ggsave("/Users/cmdb/qb25-answers/week11/ex1_30x_cov.png", plot = plot_coverage_30)
+```
+
+```{r}
+# caluclate how much of the genome has not been sequenced (has 0x coverage)?
+zero_count <- nrow(filter(df_30, V1 == 0))
+zero_count
+
+#caluclate what percentage of the genome this is
+zero_percentage <- zero_count / length(coverage_30)
+zero_percentage
+```
+
+```{r}
+# we can see how well this matches the Poission expected 0X coverage 
+zero_pois_density_prob  <- dpois(0, lambda)
+zero_pois_counts <- zero_pois_density_prob * length(coverage_30)
+
+zero_pois_counts
+zero_pois_counts/length(coverage_30)
+```
+
+```{r}
+# how well does the normal distribution match the zero coverage?
+zero_norm_probs  <- dnorm(0, mean = lambda, sd = sqrt(lambda))
+zero_norm_counts <- zero_norm_probs * length(coverage_30)
+
+zero_norm_counts
+zero_norm_counts/length(coverage_30)
+```
