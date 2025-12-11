@@ -51,3 +51,23 @@ Neither model is as accurate in terms of estimating 0X coverage as when I simula
 | **Normal Expected**  |                0.02 |    0.0000000022 % |
 
 Both models are essentially estimating 0% of the genome will be 0X covered.
+
+# Step 2.4
+
+### Now, use dot to produce a directed graph. Record the command you used.
+
+dot -Tpng graph.dot -o ex2_digraph.png
+
+# Step 2.5
+
+### Assume that the maximum number of occurrences of any 3-mer in the actual genome is five. 
+### Using your graph from Step 2.4, write one possible genome sequence that would produce these reads.
+
+[insert answer]
+
+# Step 2.6
+
+### In a few sentences, what would it take to accurately reconstruct the sequence of the genome? 
+
+[insert answer]
+
