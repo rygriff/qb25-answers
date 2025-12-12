@@ -63,11 +63,14 @@ dot -Tpng graph.dot -o ex2_digraph.png
 ### Assume that the maximum number of occurrences of any 3-mer in the actual genome is five. 
 ### Using your graph from Step 2.4, write one possible genome sequence that would produce these reads.
 
-[insert answer]
+CTTATTGATTCATTT
 
 # Step 2.6
 
 ### In a few sentences, what would it take to accurately reconstruct the sequence of the genome? 
 
-[insert answer]
+To accurately reconstruct the genome, you would need a de Bruijn graph that correctly represents all the k-mers and their true proportions in the genome. 
+Knowing how often each k-mer appears helps determine how many times to visit each edge, especially when loops or repeats are present. 
+Even with perfect k-mer counts and graph structure, highly repetitive regions would still be challenging to reconstruct because multiple paths can look equally valid. 
+This would make it difficult to determine the exact order of fragments, regardless of how well covered the genome is. 
 
